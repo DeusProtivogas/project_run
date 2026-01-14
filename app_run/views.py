@@ -8,7 +8,7 @@ from django.conf import settings
 @api_view(['GET'])
 def task_one(request):
     return Response({
-        "COMPANY_NAME": settings.COMPANY_NAME,
-        "SLOGAN": settings.SLOGAN,
-        "CONTACTS": settings.CONTACTS,
+        "company_name": settings.COMPANY_NAME,
+        "slogan": settings.SLOGAN,
+        "contacts": settings.CONTACTS,
     })
