@@ -24,7 +24,7 @@ from app_run import views
 
 router = DefaultRouter()
 router.register('api/runs', views.RunViewSet)
-# router.register('api/users', views.ReadOnlyRunnerViewSet)
+router.register('api/users', views.ReadOnlyRunnerViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
