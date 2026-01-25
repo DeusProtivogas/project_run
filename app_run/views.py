@@ -6,7 +6,9 @@ from rest_framework.response import Response
 from django.conf import settings
 
 from .models import Run
-from .serializers import RunSerializer
+from .serializers import (RunSerializer,
+                          # UserSerializer
+                          )
 
 # Create your views here.
 
@@ -21,3 +23,7 @@ def task_one(request):
 class RunViewSet(viewsets.ModelViewSet):
     queryset = Run.objects.all()
     serializer_class = RunSerializer
+
+# class ReadOnlyRunnerViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = settings.AUTH_USER_MODEL.objects.all()
+#     serializer_class = UserSerializer
