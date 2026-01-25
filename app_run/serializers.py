@@ -20,7 +20,8 @@ class UserRunnerSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'last_name', 'first_name']
 
 class RunSerializer(serializers.ModelSerializer):
-    athlete = UserRunnerSerializer(
+    athlete_data = UserRunnerSerializer(
+        source='athlete',
         read_only=True,
     )
 

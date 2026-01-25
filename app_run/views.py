@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.conf import settings
 from django.contrib.auth.models import User
 
+from django.db import connection
+
 from .models import Run
 from .serializers import (RunSerializer,
                           UserSerializer
