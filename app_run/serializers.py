@@ -4,11 +4,6 @@ from django.contrib.auth.models import User
 
 # from django.conf import settings
 
-class RunSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Run
-        fields = '__all__'
-
 class UserSerializer(serializers.ModelSerializer):
     type = serializers.SerializerMethodField()
 
@@ -18,3 +13,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_type(self, obj):
         return 'coach' if obj.is_staff else 'athlete'
+
+class UserRunnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'last_name', 'first_name']
+
+class RunSerializer(serializers.ModelSerializer):
+    athlete = UserRunnerSerializer(
+        read_only=True,
+    )
+
+    class Meta:
+        model = Run
+        fields = '__all__'

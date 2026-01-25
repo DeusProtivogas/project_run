@@ -26,7 +26,7 @@ class RunViewSet(viewsets.ModelViewSet):
     serializer_class = RunSerializer
 
 class ReadOnlyRunnerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.filter(is_superuser=False)
+    queryset = User.objects.select_related('run_set').filter(is_superuser=False)
     serializer_class = UserSerializer
 
     def get_queryset(self):
