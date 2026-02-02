@@ -24,11 +24,11 @@ def task_one(request):
     })
 
 class RunViewSet(viewsets.ModelViewSet):
-    queryset = Run.objects.all()
+    queryset = Run.objects.select_related('athlete').all()
     serializer_class = RunSerializer
 
 class ReadOnlyRunnerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.select_related('run_set').filter(is_superuser=False)
+    queryset = User.objects.filter(is_superuser=False)
     serializer_class = UserSerializer
 
     def get_queryset(self):
