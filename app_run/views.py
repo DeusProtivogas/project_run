@@ -1,5 +1,9 @@
+from http.client import HTTPResponse
+
+from django.http import JsonResponse
 from rest_framework import viewsets
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter
@@ -45,3 +49,39 @@ class ReadOnlyRunnerViewSet(viewsets.ReadOnlyModelViewSet):
         elif type == 'athlete':
             qs = qs.filter(is_staff=False)
         return qs
+
+class RunStartAPIView(APIView):
+    def post(self, request, id):
+        run = get_object_or_404(Run, pk=id)
+
+        if run.status == 'in_progress' or run.status == 'finished':
+            return JsonResponse({
+                'content': 'Забег не может быть начат!',
+            },
+            status=400
+            )
+
+        run.status = 'in_progress'
+        run.save()
+        return JsonResponse({
+            'id': run.id,
+            'status': run.status,
+        })
+
+class RunStopAPIView(APIView):
+    def post(self, request, id):
+        run = get_object_or_404(Run, pk=id)
+
+        if run.status == 'init' or run.status == 'finished':
+            return JsonResponse({
+                'content': 'Забег не может быть закончен!',
+            },
+            status=400
+            )
+
+        run.status = 'finished'
+        run.save()
+        return JsonResponse({
+            'id': run.id,
+            'status': run.status,
+        })
