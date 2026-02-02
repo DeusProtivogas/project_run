@@ -31,8 +31,8 @@ router.register('api/users', views.ReadOnlyRunnerViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/company_details/', views.task_one),
-    path('api/runs/<int:id>/start', views.RunStartAPIView.as_view()),
-    path('api/runs/<int:id>/stop', views.RunStopAPIView.as_view()),
+    path('api/runs/<int:id>/start/', views.RunStartAPIView.as_view()),
+    path('api/runs/<int:id>/stop/', views.RunStopAPIView.as_view()),
     path('', include(router.urls))
 ]
 
