@@ -49,7 +49,7 @@ class RunViewSet(viewsets.ModelViewSet):
         'status'
     ]
     ordering_fields = [
-        'started_at',
+        'created_at',
     ]
     pagination_class = RunPagination
 

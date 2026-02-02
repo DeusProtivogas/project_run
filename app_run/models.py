@@ -12,7 +12,7 @@ class Run(models.Model):
         ('finished', 'завершен'),
     ]
 
-    started_at = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True
     )
     athlete = models.ForeignKey(
