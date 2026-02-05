@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 
 class Run(models.Model):
+    class Meta:
+        verbose_name = f'Забеги'
+
     STATUS_CHOICES = [
         ('init', 'начат'),
         ('in_progress', 'в процессе'),
@@ -25,3 +28,6 @@ class Run(models.Model):
         choices=STATUS_CHOICES,
         default='init',
     )
+
+    def __str__(self):
+        return f'ID {self.id} - {self.athlete.username} - {self.status}'
