@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 
+from django.core.serializers import serialize
 from django.http import JsonResponse
 from rest_framework import viewsets
 from django.shortcuts import render, get_object_or_404
@@ -17,7 +18,8 @@ from django.db import connection
 
 from .models import Run, AthleteInfo
 from .serializers import (RunSerializer,
-                          UserSerializer
+                          UserSerializer,
+                          AthleteInfoAPIViewSerializer
                           )
 
 class RunPagination(PageNumberPagination):
@@ -135,6 +137,10 @@ class AthleteInfoAPIView(APIView):
         })
 
     def put(self, request, id):
+        serializer = AthleteInfoAPIViewSerializer(data=request.data)
+        if not serializer.is_valid():
+            return JsonResponse(serializer.errors, status=400)
+
         weight = request.data.get('weight', None)
         goals = request.data.get('goals', None)
 
