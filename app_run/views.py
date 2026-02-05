@@ -156,7 +156,7 @@ class AthleteInfoAPIView(APIView):
             defaults=defaults,
         )
         return JsonResponse({
-            'id': athlete_info.id,
+            'user_id': athlete_info.id,
             'weight': athlete_info.weight,
             'goal': athlete_info.goal,
         },
