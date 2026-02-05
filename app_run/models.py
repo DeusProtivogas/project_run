@@ -31,3 +31,18 @@ class Run(models.Model):
 
     def __str__(self):
         return f'ID {self.id} - {self.athlete.username} - {self.status}'
+
+
+class AthleteInfo(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+    weight = models.IntegerField(
+        null=True,
+    )
+    goal = models.TextField(
+        max_length=200,
+        blank=True,
+    )
+
