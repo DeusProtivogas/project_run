@@ -131,7 +131,7 @@ class AthleteInfoAPIView(APIView):
         return JsonResponse({
             'user_id': athlete_info.user.id,
             'weight': athlete_info.weight,
-            'goal': athlete_info.goal,
+            'goals': athlete_info.goal,
         })
 
     def put(self, request, id):
@@ -156,9 +156,9 @@ class AthleteInfoAPIView(APIView):
             defaults=defaults,
         )
         return JsonResponse({
-            'user_id': athlete_info.id,
+            'user_id': athlete_info.user.id,
             'weight': athlete_info.weight,
-            'goal': athlete_info.goal,
+            'goals': athlete_info.goal,
         },
         status=201)
 
