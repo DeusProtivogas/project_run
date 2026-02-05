@@ -42,7 +42,7 @@ class AthleteInfo(models.Model):
     weight = models.IntegerField(
         null=True,
     )
-    goal = models.TextField(
+    goals = models.TextField(
         max_length=200,
         blank=True,
     )

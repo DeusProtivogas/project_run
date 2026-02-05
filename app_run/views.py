@@ -131,14 +131,14 @@ class AthleteInfoAPIView(APIView):
         return JsonResponse({
             'user_id': athlete_info.user.id,
             'weight': athlete_info.weight,
-            'goals': athlete_info.goal,
+            'goals': athlete_info.goals,
         })
 
     def put(self, request, id):
         weight = request.data.get('weight', None)
-        goal = request.data.get('goals', None)
+        goals = request.data.get('goals', None)
 
-        print(weight, goal)
+        print(weight, goals)
 
         defaults = {}
 
@@ -148,8 +148,8 @@ class AthleteInfoAPIView(APIView):
                     'message': 'Wrong weight!'
                 }, status=400)
             defaults['weight'] = int(weight)
-        if goal:
-            defaults['goals'] = goal
+        if goals:
+            defaults['goals'] = goals
 
         athlete_info, created = AthleteInfo.objects.update_or_create(
             pk=id,
@@ -158,7 +158,7 @@ class AthleteInfoAPIView(APIView):
         return JsonResponse({
             'user_id': athlete_info.user.id,
             'weight': athlete_info.weight,
-            'goals': athlete_info.goal,
+            'goals': athlete_info.goals,
         },
         status=201)
 
