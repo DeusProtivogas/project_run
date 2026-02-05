@@ -136,7 +136,7 @@ class AthleteInfoAPIView(APIView):
 
     def put(self, request, id):
         weight = request.data.get('weight', None)
-        goal = request.data.get('goal', None)
+        goal = request.data.get('goals', None)
 
         print(weight, goal)
 
@@ -149,7 +149,7 @@ class AthleteInfoAPIView(APIView):
                 }, status=400)
             defaults['weight'] = int(weight)
         if goal:
-            defaults['goal'] = goal
+            defaults['goals'] = goal
 
         athlete_info, created = AthleteInfo.objects.update_or_create(
             pk=id,
