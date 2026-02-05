@@ -138,6 +138,14 @@ class AthleteInfoAPIView(APIView):
 
     def put(self, request, id):
         serializer = AthleteInfoAPIViewSerializer(data=request.data)
+        user = User.objects.filter(pk=id).first()
+        print('TEST ', user)
+        if not user:
+            return JsonResponse({
+                'content': 'Пользователя нет!',
+            },
+                status=404
+            )
         if not serializer.is_valid():
             return JsonResponse(serializer.errors, status=400)
 
