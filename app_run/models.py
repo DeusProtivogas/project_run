@@ -37,6 +37,7 @@ class AthleteInfo(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
+        null=True,
     )
     weight = models.IntegerField(
         null=True,
